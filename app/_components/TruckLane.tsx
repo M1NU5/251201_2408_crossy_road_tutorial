@@ -1,28 +1,28 @@
 import React from 'react'
 import { Row } from '../types'
 import Road from './Road'
-import { Car } from './Car'
+import Truck from './Truck'
 
 type Props = {
 	rowIndex: number
-	rowData: Extract<Row, { type: 'car' }>
+	rowData: Extract<Row, { type: 'truck' }>
 }
 
-const CarLane = ({ rowIndex, rowData }: Props) => {
+const TruckLane = ({ rowIndex, rowData }: Props) => {
 	return (
 		<Road rowIndex={rowIndex}>
 			{rowData.vehicles.map((vehicle, index) => (
-				<Car
+				<Truck
 					key={index}
 					rowIndex={rowIndex}
+					color={vehicle.color}
 					initialTileIndex={vehicle.initialTileIndex}
 					direction={rowData.direction}
 					speed={rowData.speed}
-					color={vehicle.color}
 				/>
 			))}
 		</Road>
 	)
 }
 
-export default CarLane
+export default TruckLane

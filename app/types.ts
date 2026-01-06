@@ -25,3 +25,5 @@ export type Row =
 				color: THREE.ColorRepresentation
 			}[]
 	  }
+
+export type ValidMove = 'forward' | 'backward' | 'left' | 'right'

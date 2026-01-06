@@ -1,6 +1,11 @@
+'use client'
+
 import * as THREE from 'three'
+import { useRef } from 'react'
 import { tileSize } from '../config'
 import Wheel from './Wheel'
+import useVehicleAnimation from '../hooks/useVehicleAnimation'
+import useHitDetection from '../hooks/useHitDetection'
 
 type Props = {
 	rowIndex: number
@@ -10,16 +15,21 @@ type Props = {
 	color: THREE.ColorRepresentation
 }
 
-const Car = ({ rowIndex, initialTileIndex, direction, speed, color }: Props) => {
+export function Car({ rowIndex, initialTileIndex, direction, speed, color }: Props) {
+	const car = useRef<THREE.Group>(null)
+	useVehicleAnimation(car, direction, speed)
+	useHitDetection(car, rowIndex)
+
 	return (
 		<group
 			position-x={initialTileIndex * tileSize}
-			rotation-z={direction ? 0 : Math.PI}>
-			<mesh position={[0, 0, 12]}>
+			rotation-z={direction ? 0 : Math.PI}
+			ref={car}>
+			<mesh position={[0, 0, 12]} castShadow receiveShadow>
 				<boxGeometry args={[60, 30, 15]} />
 				<meshLambertMaterial color={color} flatShading />
 			</mesh>
-			<mesh position={[-6, 0, 25.5]}>
+			<mesh position={[-6, 0, 25.5]} castShadow receiveShadow>
 				<boxGeometry args={[33, 24, 12]} />
 				<meshLambertMaterial color={0xffffff} flatShading />
 			</mesh>
@@ -28,5 +38,3 @@ const Car = ({ rowIndex, initialTileIndex, direction, speed, color }: Props) => 
 		</group>
 	)
 }
-
-export default Car

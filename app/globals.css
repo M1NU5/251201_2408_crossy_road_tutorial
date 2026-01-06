@@ -3,9 +3,9 @@
 body {
 	margin: 0;
 	display: flex;
-	min-height: 100vh;
+	/* min-height: 10vh; */
 }
 
 #root {
-	width: 100%;
+	/* width: 100%; */
 }

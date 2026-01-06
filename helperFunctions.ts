@@ -1,18 +1,64 @@
-// import { useThree } from '@react-three/fiber'
-// import { useEffect } from 'react'
+import { maxTileIndex, minTileIndex } from './app/config'
+// import { rows } from './app/metaData'  ////This is used when defining a set of rows i.e. the same map every time instead of a random set as below.
+import useMapStore from './app/_stores/map'
+import { ValidMove } from './app/types'
 
-// export function ZoomController() {
-// 	const { camera } = useThree()
+export function calculateFinalPosition(
+	currentPosition: { rowIndex: number; tileIndex: number },
+	moves: ValidMove[]
+) {
+	return moves.reduce((position, direction) => {
+		if (direction === 'forward')
+			return {
+				rowIndex: position.rowIndex + 1,
+				tileIndex: position.tileIndex
+			}
+		if (direction === 'backward')
+			return {
+				rowIndex: position.rowIndex - 1,
+				tileIndex: position.tileIndex
+			}
+		if (direction === 'left')
+			return {
+				rowIndex: position.rowIndex,
+				tileIndex: position.tileIndex - 1
+			}
+		if (direction === 'right')
+			return {
+				rowIndex: position.rowIndex,
+				tileIndex: position.tileIndex + 1
+			}
+		return position
+	}, currentPosition)
+}
 
-// 	useEffect(() => {
-// 		const onWheel = (e: WheelEvent) => {
-// 			camera.zoom = Math.max(0.2, Math.min(2, camera.zoom - e.deltaY * 0.001))
-// 			camera.updateProjectionMatrix()
-// 		}
+export function endsUpInValidPosition(
+	currentPosition: { rowIndex: number; tileIndex: number },
+	moves: ValidMove[]
+) {
+	// Calculate where the player would end up after the move
+	const finalPosition = calculateFinalPosition(currentPosition, moves)
 
-// 		window.addEventListener('wheel', onWheel)
-// 		return () => window.removeEventListener('wheel', onWheel)
-// 	}, [camera])
+	// Detect if we hit the edge of the board
+	if (
+		finalPosition.rowIndex === -1 ||
+		finalPosition.tileIndex === minTileIndex - 1 ||
+		finalPosition.tileIndex === maxTileIndex + 1
+	) {
+		// Invalid move, ignore move command
+		return false
+	}
 
-// 	return null
-// }
+	// Detect if we hit a tree
+	const finalRow = useMapStore.getState().rows[finalPosition.rowIndex - 1]
+	if (
+		finalRow &&
+		finalRow.type === 'forest' &&
+		finalRow.trees.some(tree => tree.tileIndex === finalPosition.tileIndex)
+	) {
+		// Invalid move, ignore move command
+		return false
+	}
+
+	return true
+}
