@@ -1,7 +1,7 @@
-import { maxTileIndex, minTileIndex } from './app/config'
+import { maxTileIndex, minTileIndex } from './config'
 // import { rows } from './app/metaData'  ////This is used when defining a set of rows i.e. the same map every time instead of a random set as below.
-import useMapStore from './app/_stores/map'
-import { ValidMove } from './app/types'
+import useMapStore from '../_stores/map'
+import { ValidMove } from '../types'
 
 export function calculateFinalPosition(
 	currentPosition: { rowIndex: number; tileIndex: number },

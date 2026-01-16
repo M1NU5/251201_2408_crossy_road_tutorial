@@ -1,4 +1,4 @@
-import { endsUpInValidPosition } from '@/helperFunctions'
+import { endsUpInValidPosition } from '@/app/_utilities/helperFunctions'
 import type { ValidMove } from '../types'
 import useMapStore from '../_stores/map'
 import useGameStore from '../_stores/game'

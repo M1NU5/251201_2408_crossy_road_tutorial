@@ -1,7 +1,7 @@
 'use client'
 
 import * as THREE from 'three'
-import { tileSize } from '../config'
+import { tileSize } from '../_utilities/config'
 import Wheel from './Wheel'
 import { useRef } from 'react'
 import useVehicleAnimation from '../hooks/useVehicleAnimation'

@@ -1,5 +1,5 @@
 import React from 'react'
-import { tileSize, tilesPerRow } from '../config'
+import { tileSize, tilesPerRow } from '../_utilities/config'
 
 type Props = {
 	rowIndex: number

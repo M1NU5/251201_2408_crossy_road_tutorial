@@ -2,7 +2,7 @@
 
 import * as THREE from 'three'
 import { useRef } from 'react'
-import { tileSize } from '../config'
+import { tileSize } from '../_utilities/config'
 import Wheel from './Wheel'
 import useVehicleAnimation from '../hooks/useVehicleAnimation'
 import useHitDetection from '../hooks/useHitDetection'

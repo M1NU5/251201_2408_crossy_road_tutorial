@@ -1,6 +1,6 @@
 import * as THREE from 'three'
 import { useFrame } from '@react-three/fiber'
-import { maxTileIndex, minTileIndex, tileSize } from '../config'
+import { maxTileIndex, minTileIndex, tileSize } from '../_utilities/config'
 
 const useVehicleAnimation = (
 	ref: React.RefObject<THREE.Group | null>,

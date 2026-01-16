@@ -1,5 +1,5 @@
 import React from 'react'
-import { tileSize } from '../config'
+import { tileSize } from '../_utilities/config'
 
 type Props = {
 	tileIndex: number

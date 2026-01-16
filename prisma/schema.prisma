@@ -1,0 +1,21 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+model LeaderboardEntry {
+  id        String   @id @default(cuid())
+  userId    String
+  username  String
+  score     Int
+  mode      String
+  createdAt DateTime @default(now())
+
+  @@unique([userId, mode], name: "userId_mode")
+  @@index([mode, score, createdAt])
+  @@index([userId, mode, score])
+}
+

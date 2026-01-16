@@ -1,7 +1,7 @@
 import * as THREE from 'three'
 
 import { type Row, type RowType } from '../types'
-import { maxTileIndex, minTileIndex } from '../config'
+import { maxTileIndex, minTileIndex } from './config'
 
 export function generateRows(amount: number): Row[] {
 	const rows: Row[] = []

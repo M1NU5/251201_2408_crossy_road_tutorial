@@ -1,7 +1,7 @@
 import * as THREE from 'three'
 import { useFrame } from '@react-three/fiber'
 import { state, stepCompleted } from '../_stores/player'
-import { tileSize } from '../config'
+import { tileSize } from '../_utilities/config'
 
 export default function usePlayerAnimation(ref: React.RefObject<THREE.Group | null>) {
 	const moveClock = new THREE.Clock(false)
