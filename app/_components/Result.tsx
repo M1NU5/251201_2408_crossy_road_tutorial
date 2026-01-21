@@ -1,5 +1,4 @@
 'use client'
-import React from 'react'
 import useStore from '../_stores/game'
 
 const Result = () => {
